@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'php'
+    }
+    
+  }
   stages {
     stage('deployment') {
       steps {
@@ -14,6 +19,11 @@ pipeline {
     stage('production') {
       steps {
         sh 'sh \'application in production mode\''
+      }
+    }
+    stage('deployed') {
+      steps {
+        echo 'application deployed'
       }
     }
   }
